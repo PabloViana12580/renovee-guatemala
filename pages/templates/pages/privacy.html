@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{# Draft for the owner to confirm, ideally with a legal professional. Keep it in line with what the site really collects. #}
+
+{% block title %}{% translate "Privacy policy" %} | {{ site_info.name }}{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'pages/site.css' %}">{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container site-container prose">
+    <h1 class="page-title">{% translate "Privacy policy" %}</h1>
+    <p class="page-lede">Cómo trata {{ site_info.name }} los datos personales que usted comparte a través de este sitio web.</p>
+    <p class="legal-updated">Última actualización: noviembre de 2026.</p>
+
+    <h2>Quién es responsable</h2>
+    <p>{{ site_info.name }}{% if site_info.address %}, con domicilio en {{ site_info.address }},{% endif %} es responsable de sus datos.
+      {% if site_info.phone %}Puede comunicarse con nosotros al <a href="{{ site_info.phone_href }}">{{ site_info.phone }}</a>{% if site_info.whatsapp_href %} o por <a href="{{ site_info.whatsapp_href }}">WhatsApp</a>{% endif %}.{% endif %}
+      {% if site_info.email %}También puede escribirnos a <a href="mailto:{{ site_info.email }}">{{ site_info.email }}</a>.{% endif %}</p>
+
+    <h2>Qué datos recogemos y para qué</h2>
+    {% if 'crm' in site_info.modules %}
+      <p>Cuando nos envía un mensaje desde el formulario de contacto, guardamos su nombre, su correo electrónico, su teléfono (si lo indica) y su mensaje, para responderle y dar seguimiento a su solicitud de cotización. Si marca la casilla para recibir novedades y ofertas, también registramos esa decisión y la fecha en que la tomó.</p>
+    {% else %}
+      <p>Este sitio no pide datos personales. Si nos contacta por teléfono o WhatsApp, usamos sus datos solo para responderle.</p>
+    {% endif %}
+    <p>Si nos escribe por WhatsApp, esa conversación se rige además por las condiciones de WhatsApp.</p>
+
+    <h2>Cookies</h2>
+    <p>Usamos solo las cookies necesarias para que el sitio funcione de forma segura (por ejemplo, para proteger los formularios contra falsificaciones). No usamos cookies de publicidad ni de analítica.</p>
+
+    <h2>Quién puede verlos</h2>
+    <p>Solo nuestro personal. Nuestros proveedores de alojamiento web y de base de datos los guardan por cuenta nuestra. No vendemos ni compartimos sus datos.</p>
+
+    <h2>Cuánto tiempo los guardamos</h2>
+    <p>El tiempo necesario para atenderle y darle servicio; después los eliminamos. Puede pedirnos que los eliminemos en cualquier momento.</p>
+
+    <h2>Sus derechos</h2>
+    <p>Puede pedirnos una copia de los datos que tenemos sobre usted, pedir que los corrijamos o eliminemos, o retirar su consentimiento para recibir novedades y ofertas, por los medios de contacto indicados arriba.</p>
+  </div>
+</section>
+{% endblock %}

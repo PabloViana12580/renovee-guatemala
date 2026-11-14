@@ -1,0 +1,12 @@
+{
+  "starter_version": "0.1.0",
+  "created": "2026-11-13",
+  "name": "R\u00e9nov\u00e9e Guatemala",
+  "slug": "renovee-guatemala",
+  "language": "es",
+  "time_zone": "America/Guatemala",
+  "modules": [
+    "website",
+    "crm"
+  ]
+}

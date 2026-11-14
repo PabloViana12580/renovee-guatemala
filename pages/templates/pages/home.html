@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ site_info.name }} | Limpieza y restauración de muebles y pisos{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'pages/site.css' %}">{% endblock %}
+
+{% block content %}
+<section class="hero on-ink" aria-labelledby="hero-title">
+  <div class="container site-container hero__grid">
+    <div>
+      <h1 class="hero__title" id="hero-title">Muebles y pisos impecables para hoteles, edificios y oficinas</h1>
+      <p class="hero__lede">Limpiamos, restauramos y retapizamos su mobiliario, y abrillantamos pisos con maquinaria especializada. Una empresa familiar guatemalteca, desde 1988.</p>
+      <div class="actions">
+        {% if site_info.whatsapp_href %}<a class="btn-site btn-site--gold" href="{{ site_info.whatsapp_href }}">Cotizar por WhatsApp</a>{% endif %}
+        {% if site_info.phone %}<a class="btn-site btn-site--line-light" href="{{ site_info.phone_href }}">Llamar al {{ site_info.phone }}</a>{% endif %}
+      </div>
+      {% if site_info.address %}<p class="hero__place">{{ site_info.address }}</p>{% endif %}
+    </div>
+    <figure class="hero__media">
+      <img src="{% static 'img/comedor-restaurado.webp' %}" alt="Comedor con sillas tapizadas y alfombra limpias, después de un servicio de Rénovée" width="1080" height="590">
+    </figure>
+  </div>
+</section>
+
+<section class="section section--alt" aria-labelledby="clientes-title">
+  <div class="container site-container">
+    <h2 class="section__title" id="clientes-title">Para espacios que reciben a muchas personas</h2>
+    <p class="section__intro">Ya mantenemos brillantes los pisos de edificios y hoteles con equipo especializado, y cuidamos el mobiliario de sus áreas comunes.</p>
+    <div class="audiences">
+      <div class="audience">
+        <h3>Hoteles</h3>
+        <p>Sofás, sillones y sillas de habitaciones, lobbies y restaurantes; alfombras, cortinas y pisos de madera.</p>
+      </div>
+      <div class="audience">
+        <h3>Edificios y condominios</h3>
+        <p>Abrillantado de pisos de áreas comunes, limpieza de ventanas en altura y mantenimiento del mobiliario de lobbies y terrazas.</p>
+      </div>
+      <div class="audience">
+        <h3>Oficinas y comercios</h3>
+        <p>Salas de espera, sillas, alfombras e interiores, en horarios que se adaptan a su operación.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="madera-title">
+  <div class="container site-container">
+    <div class="compare__head">
+      <h2 class="section__title" id="madera-title">La madera vuelve a brillar</h2>
+      <p>Restauración y abrillantado de pisos y revestimientos de madera. Cotice con solo el metraje.</p>
+    </div>
+    <div class="compare__pair">
+      <figure class="compare__item">
+        <img src="{% static 'img/piso-madera-antes.webp' %}" alt="Revestimiento de madera con manchas blancas y rayones, antes del servicio" width="716" height="560" loading="lazy">
+        <figcaption class="compare__label">Antes</figcaption>
+      </figure>
+      <figure class="compare__item compare__item--after">
+        <img src="{% static 'img/piso-madera-despues.webp' %}" alt="El mismo revestimiento de madera restaurado, con brillo y color parejo" width="700" height="523" loading="lazy">
+        <figcaption class="compare__label">Después</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" id="servicios" aria-labelledby="servicios-title">
+  <div class="container site-container">
+    <h2 class="section__title" id="servicios-title">Servicios</h2>
+
+    <article class="service">
+      <figure class="service__media">
+        <img src="{% static 'img/limpieza-sillon.webp' %}" alt="Técnica de Rénovée limpiando un sillón tapizado con una aspiradora profesional" width="1080" height="620" loading="lazy">
+      </figure>
+      <div>
+        <h3>Limpieza de muebles y salas</h3>
+        <p>Limpieza profunda de sofás, sillones y sillas tapizadas: eliminamos polvo, manchas y alérgenos y dejamos cada pieza fresca.</p>
+      </div>
+    </article>
+
+    <article class="service">
+      <figure class="service__media">
+        <img src="{% static 'img/sala-exterior-retapizada.webp' %}" alt="Sala de terraza con cojines verdes retapizados y muebles de madera" width="1128" height="667" loading="lazy">
+      </figure>
+      <div>
+        <h3>Retapizado de muebles</h3>
+        <p>Usted elige la tela y el estilo; nosotros retapizamos y le entregamos el mueble listo para usar.</p>
+      </div>
+    </article>
+
+    <article class="service">
+      <figure class="service__media">
+        <img src="{% static 'img/1000056816.webp' %}" alt="Sillones de exterior blancos junto a una piscina, limpios y montados" width="1600" height="1200" loading="lazy">
+      </figure>
+      <div>
+        <h3>Muebles de exterior</h3>
+        <p>Limpieza y montaje de los muebles de terrazas, piscinas y jardines.</p>
+      </div>
+    </article>
+
+    <article class="service">
+      <figure class="service__media">
+        <img src="{% static 'img/trabajo-en-altura.webp' %}" alt="Dos técnicos con arnés de seguridad trabajando en el balcón de un edificio alto" width="1440" height="780" loading="lazy">
+      </figure>
+      <div>
+        <h3>Ventanas en altura</h3>
+        <p>Limpieza de ventanas en edificios, con personal equipado con arnés y casco.</p>
+      </div>
+    </article>
+
+    <div class="more-services">
+      <h3>También hacemos</h3>
+      <ul class="more-services__list">
+        <li><strong>Abrillantado de pisos</strong><span>Pisos de áreas comunes y de madera, con maquinaria especializada.</span></li>
+        <li><strong>Alfombras</strong><span>Técnicas especializadas que recuperan su apariencia y alargan su vida útil.</span></li>
+        <li><strong>Cortinas</strong><span>Quitamos la suciedad y el polvo acumulados, para un ambiente más sano.</span></li>
+        <li><strong>Interiores</strong><span>Limpieza profunda de espacios interiores, con una atmósfera higiénica como resultado.</span></li>
+        <li><strong>Limpieza comercial</strong><span>Locales y oficinas limpios para sus clientes y empleados.</span></li>
+        <li><strong>Apartamentos de Airbnb</strong><span>Mantenimiento regular entre estadías.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="record on-ink" aria-label="Trayectoria">
+  <div class="container site-container">
+    <p>Más de 1,500 proyectos y 2,400 clientes atendidos desde 1988.</p>
+  </div>
+</section>
+
+{% include "pages/_team.html" %}
+
+<section class="cta" aria-labelledby="cotizar-title">
+  <div class="container site-container cta__grid">
+    <div>
+      <h2 class="section__title" id="cotizar-title">Cotice su proyecto</h2>
+      <p>Cuéntenos qué muebles o pisos necesita atender, y dónde. Le respondemos con una cotización.</p>
+    </div>
+    <div>
+      <div class="actions">
+        {% if site_info.whatsapp_href %}<a class="btn-site btn-site--ink" href="{{ site_info.whatsapp_href }}">Escribir por WhatsApp</a>{% endif %}
+        {% if 'crm' in site_info.modules %}<a class="btn-site btn-site--line-ink" href="{% url 'crm:contact' %}">Enviar un mensaje</a>{% endif %}
+      </div>
+      {% if site_info.phone %}<p class="cta__place">Teléfono: <a href="{{ site_info.phone_href }}">{{ site_info.phone }}</a></p>{% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

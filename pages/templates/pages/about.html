@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Sobre nosotros | {{ site_info.name }}{% endblock %}
+{% block meta_description %}Rénovée Guatemala: empresa familiar de limpieza y restauración de muebles y pisos, desde 1988.{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'pages/site.css' %}">{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container site-container split">
+    <div>
+      <h1 class="page-title">Sobre Rénovée</h1>
+      <p class="page-lede">Una empresa familiar guatemalteca que limpia y restaura muebles y pisos desde 1988.</p>
+      <p>Nos dedicamos a restaurar y mantener espacios limpios y saludables, que inspiren confianza y bienestar a quienes los usan. Atendemos hogares y negocios, y hoy trabajamos sobre todo para hoteles, edificios y oficinas.</p>
+      <p>Llegamos con nuestro propio vehículo, equipo y maquinaria hasta su edificio.</p>
+    </div>
+    <figure>
+      <img src="{% static 'img/1000040245.webp' %}" alt="Camión de Rénovée, blanco con el logotipo y franjas doradas" width="1000" height="667">
+    </figure>
+  </div>
+</section>
+
+<section class="section section--alt" aria-labelledby="forma-title">
+  <div class="container site-container">
+    <h2 class="section__title" id="forma-title">Cómo trabajamos</h2>
+    <ul class="values">
+      <li><strong>Eficiencia y rapidez</strong><span>Un equipo entrenado para dar resultados rápidos sin descuidar la calidad.</span></li>
+      <li><strong>Productos ecológicos</strong><span>Productos de limpieza ecológicos y seguros para las personas y el medio ambiente.</span></li>
+      <li><strong>Experiencia</strong><span>Técnicos con años de experiencia en limpieza, restauración y mantenimiento.</span></li>
+      <li><strong>Atención a la medida</strong><span>Cada cliente recibe un plan según sus espacios, horarios y necesidades.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="altura-title">
+  <div class="container site-container split">
+    <figure>
+      <img src="{% static 'img/supervision-seguridad.webp' %}" alt="Supervisor de Rénovée revisando el arnés de un técnico en un edificio en construcción" width="1440" height="760" loading="lazy">
+    </figure>
+    <div>
+      <h2 class="section__title" id="altura-title">Seguridad en los trabajos en altura</h2>
+      <p>En ventanas y balcones de edificios, nuestro personal trabaja con arnés y casco, y un supervisor revisa el equipo antes de empezar.</p>
+    </div>
+  </div>
+</section>
+
+{% include "pages/_team.html" %}
+{% endblock %}

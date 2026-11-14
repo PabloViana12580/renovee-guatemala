@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{# Draft for the owner to confirm, ideally with a legal professional. #}
+
+{% block title %}{% translate "Terms of use" %} | {{ site_info.name }}{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'pages/site.css' %}">{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container site-container prose">
+    <h1 class="page-title">{% translate "Terms of use" %}</h1>
+    <p class="page-lede">Las condiciones para usar el sitio web de {{ site_info.name }}.</p>
+    <p class="legal-updated">Última actualización: noviembre de 2026.</p>
+
+    <h2>Sobre este sitio</h2>
+    <p>Este sitio web pertenece a {{ site_info.name }}, empresa guatemalteca{% if site_info.address %} con domicilio en {{ site_info.address }}{% endif %}. La información que contiene describe nuestros servicios y puede cambiar sin previo aviso.</p>
+
+    <h2>Contenido</h2>
+    <p>Los textos, fotografías, logotipos y diseños de este sitio pertenecen a {{ site_info.name }} o se usan con permiso. Le pedimos no reutilizarlos sin autorización.</p>
+
+    <h2>Cotizaciones</h2>
+    <p>Los servicios, precios y fechas se confirman en cada cotización. Lo publicado en este sitio no constituye una oferta con precio.</p>
+
+    <h2>Responsabilidad</h2>
+    <p>Procuramos que la información sea correcta y esté actualizada, pero no podemos garantizar que siempre esté completa.</p>
+
+    <h2>Contacto</h2>
+    <p>Preguntas sobre estas condiciones:{% if site_info.phone %} <a href="{{ site_info.phone_href }}">{{ site_info.phone }}</a>{% endif %}{% if site_info.whatsapp_href %} o <a href="{{ site_info.whatsapp_href }}">WhatsApp</a>{% endif %}{% if site_info.email %}, <a href="mailto:{{ site_info.email }}">{{ site_info.email }}</a>{% endif %}.</p>
+  </div>
+</section>
+{% endblock %}

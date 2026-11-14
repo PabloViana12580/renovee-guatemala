@@ -1,0 +1,26 @@
+{% load static %}
+{# The people who run Rénovée, and the whole crew. Used on the home and about pages. #}
+<section class="section" aria-labelledby="equipo-title">
+  <div class="container site-container">
+    <h2 class="section__title" id="equipo-title">Quienes dirigen Rénovée</h2>
+    <p class="section__intro">Una empresa familiar: padre e hijos al frente de cada proyecto, con un equipo propio de técnicos.</p>
+    <div class="team">
+      <figure class="person">
+        <img src="{% static 'img/papa-vega.webp' %}" alt="Retrato de Herberth Vega Sr." width="1023" height="1537" loading="lazy">
+        <figcaption><span class="person__name">Herberth Vega Sr.</span><span class="person__role">Director general</span></figcaption>
+      </figure>
+      <figure class="person">
+        <img src="{% static 'img/vega.webp' %}" alt="Retrato de Herberth Vega" width="513" height="768" loading="lazy">
+        <figcaption><span class="person__name">Herberth Vega</span><span class="person__role">Gerente de proyectos</span></figcaption>
+      </figure>
+      <figure class="person">
+        <img src="{% static 'img/hermano-vega.webp' %}" alt="Retrato de José Vega" width="509" height="768" loading="lazy">
+        <figcaption><span class="person__name">José Vega</span><span class="person__role">Director financiero</span></figcaption>
+      </figure>
+    </div>
+    <figure class="crew">
+      <img src="{% static 'img/equipo-renovee.webp' %}" alt="El equipo de Rénovée, con su uniforme negro y dorado" width="1440" height="620" loading="lazy">
+      <figcaption>El equipo de Rénovée.</figcaption>
+    </figure>
+  </div>
+</section>

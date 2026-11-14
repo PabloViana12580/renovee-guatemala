@@ -1,0 +1,106 @@
+/*
+ * Rénovée Guatemala: website pages. Uses the tokens from css/app.css.
+ * Black and gold come from the brand's own graphics; purple marks what can be clicked on light
+ * backgrounds. The one bold element is the before/after comparison (.compare).
+ */
+
+.section__intro { max-width: 40rem; color: var(--color-muted); font-size: var(--text-lg); margin-bottom: var(--space-7); }
+.on-ink .section__intro { color: var(--color-on-ink-muted); }
+
+/* Hero: black, like the company's vehicles and posts, closed by a gold band. */
+.hero { padding-block: var(--space-7) var(--space-8); border-bottom: 6px solid var(--color-accent); }
+.hero__grid { display: grid; gap: var(--space-7); align-items: center; }
+@media (min-width: 992px) { .hero__grid { grid-template-columns: 7fr 6fr; } }
+.hero__title { font-size: clamp(2.5rem, 4.6vw, 4rem); line-height: 1.05; margin-bottom: var(--space-5); max-width: 18ch; }
+.hero__lede { font-size: var(--text-lg); color: var(--color-on-ink-muted); max-width: 33rem; margin-bottom: var(--space-6); }
+.hero__media { margin: 0; }
+.hero__media img { display: block; width: 100%; aspect-ratio: 5 / 3; object-fit: cover; }
+.hero__place { margin: var(--space-5) 0 0; font-size: var(--text-sm); color: var(--color-on-ink-muted); }
+
+/* Who it is for: three audiences, separated by rules rather than boxed into cards. */
+.audiences { display: grid; gap: var(--space-6); }
+@media (min-width: 768px) { .audiences { grid-template-columns: repeat(3, 1fr); } }
+.audience { padding-top: var(--space-4); border-top: 2px solid var(--color-ink); }
+.audience h3 { font-size: var(--text-xl); margin-bottom: var(--space-3); }
+.audience p { margin: 0; color: var(--color-muted); }
+
+/* Before and after: the memorable piece. Two photos of the same wall, same height. */
+.compare__head { display: grid; gap: var(--space-4); margin-bottom: var(--space-6); }
+@media (min-width: 992px) { .compare__head { grid-template-columns: 1fr 1fr; align-items: end; } }
+.compare__head .section__title { font-size: var(--text-3xl); line-height: 1.04; margin: 0; }
+.compare__head p { margin: 0; color: var(--color-muted); font-size: var(--text-lg); max-width: 32rem; }
+.compare__pair { display: grid; gap: var(--space-3); }
+@media (min-width: 768px) { .compare__pair { grid-template-columns: 1fr 1fr; gap: 6px; } }
+.compare__item { position: relative; margin: 0; background: var(--color-ink); }
+.compare__item img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.compare__label {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  padding: var(--space-1) var(--space-3);
+  background: var(--color-ink);
+  color: var(--color-on-ink);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+.compare__item--after .compare__label { background: var(--color-accent); color: var(--color-ink); }
+
+/* Services: featured services as alternating photo rows, the rest as a plain list. */
+.service { display: grid; gap: var(--space-5); align-items: center; padding-block: var(--space-6); }
+.service + .service { border-top: 1px solid var(--color-border); }
+@media (min-width: 992px) {
+  .service { grid-template-columns: 7fr 5fr; gap: var(--space-7); }
+  .service:nth-of-type(even) .service__media { order: 2; }
+}
+.service__media { margin: 0; }
+.service__media img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+.service h3 { font-size: var(--text-2xl); line-height: 1.1; margin-bottom: var(--space-3); }
+.service p { margin: 0; color: var(--color-muted); max-width: 34rem; }
+
+.more-services { margin-top: var(--space-7); }
+.more-services h3 { font-size: var(--text-xl); margin-bottom: var(--space-5); }
+.more-services__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-5) var(--space-6); }
+@media (min-width: 768px) { .more-services__list { grid-template-columns: repeat(3, 1fr); } }
+.more-services__list strong { display: block; margin-bottom: var(--space-1); font-weight: 600; }
+.more-services__list span { color: var(--color-muted); }
+
+/* Track record: one sentence instead of counters. */
+.record { padding-block: var(--space-7); }
+.record p { margin: 0; font-family: var(--font-display); font-size: var(--text-2xl); line-height: 1.25; max-width: 30ch; }
+
+/* Team: the three people who run the company, then the whole crew. */
+.team { display: grid; gap: var(--space-6); margin-bottom: var(--space-7); }
+@media (min-width: 640px) { .team { grid-template-columns: repeat(3, 1fr); } }
+.person { margin: 0; }
+.person img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top; background: var(--color-surface-alt); }
+.person figcaption { padding-top: var(--space-4); border-top: 3px solid var(--color-accent); margin-top: var(--space-3); }
+.person__name { display: block; font-family: var(--font-display); font-size: var(--text-xl); line-height: 1.2; }
+.person__role { display: block; color: var(--color-muted); font-size: var(--text-sm); margin-top: var(--space-1); }
+.crew { margin: 0; }
+.crew img { display: block; width: 100%; }
+.crew figcaption { margin-top: var(--space-3); color: var(--color-muted); font-size: var(--text-sm); }
+
+/* Call to action on gold, with black buttons. */
+.cta { background: var(--color-accent); color: var(--color-ink); padding-block: var(--space-8); }
+.cta__grid { display: grid; gap: var(--space-6); align-items: end; }
+@media (min-width: 992px) { .cta__grid { grid-template-columns: 7fr 5fr; } }
+.cta .section__title { font-size: var(--text-3xl); line-height: 1.04; margin-bottom: var(--space-4); }
+.cta p { margin: 0; max-width: 34rem; font-size: var(--text-lg); }
+.cta .actions { justify-content: flex-start; }
+.cta .cta__place { margin-top: var(--space-4); font-size: var(--text-sm); }
+.cta :focus-visible { box-shadow: 0 0 0 2px var(--color-accent), 0 0 0 4px var(--color-ink); }
+
+/* About page */
+.split { display: grid; gap: var(--space-6); align-items: center; }
+@media (min-width: 992px) { .split { grid-template-columns: 1fr 1fr; gap: var(--space-7); } }
+.split figure { margin: 0; }
+.split img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.values { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-5); }
+@media (min-width: 768px) { .values { grid-template-columns: 1fr 1fr; } }
+.values li { padding-left: var(--space-4); border-left: 3px solid var(--color-accent); }
+.values strong { display: block; font-weight: 600; }
+.values span { color: var(--color-muted); }
+
+/* Legal pages */
+.legal-updated { font-size: var(--text-sm); color: var(--color-muted); }
+.cta a:not(.btn-site) { color: var(--color-ink); }

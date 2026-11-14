@@ -1,0 +1,6 @@
+{% load static %}
+{# Wordmark with the armchair from the Rénovée logo. The mark is white; css/app.css darkens it on light surfaces. #}
+<a class="brand" href="/">
+  <img class="brand__mark" src="{% static 'img/sillon-renovee.webp' %}" alt="" width="108" height="112">
+  <span class="brand__name">{{ site_info.name }}</span>
+</a>
