@@ -110,6 +110,55 @@ class HiddenDataTests(PillowTestCase):
         self.assertEqual(removed, [imagemeta.CREDENTIALS])
         self.assertEqual(cleaned, plain)
 
+    def test_jpeg_segments_are_sorted_into_kept_and_removed(self):
+        def segment(marker, payload):
+            return bytes((0xFF, marker)) + (len(payload) + 2).to_bytes(2, 'big') + payload
+
+        plain = encoded('JPEG')
+        extras = [
+            segment(0xE1, b'http://ns.adobe.com/xap/1.0/\x00<x:xmpmeta>account-name</x:xmpmeta>'),
+            segment(0xED, b'Photoshop 3.0\x00IPTC caption'),
+            segment(0xE0, b'JFXX\x00\x10 a thumbnail'),
+            segment(0xE5, b'a camera maker block'),
+            segment(0xE1, b'Exif\x00\x00not a TIFF header'),
+            segment(0xEE, b'Adobe\x00\x64\x00\x00\x00\x00\x01'),  # color transform: kept
+            segment(0xE2, b'ICC_PROFILE\x00\x01\x01profile bytes'),  # color profile: kept
+        ]
+        data = plain[:2] + b''.join(extras) + plain[2:]
+        cleaned, removed = imagemeta.clean(data)
+        self.assertEqual(removed, [imagemeta.XMP, imagemeta.IPTC, imagemeta.THUMBNAIL, imagemeta.OTHER, imagemeta.EXIF])
+        self.assertEqual(cleaned, plain[:2] + extras[5] + extras[6] + plain[2:])
+        self.assertSamePixels(data, cleaned)
+
+    def test_damaged_files_are_refused_rather_than_guessed(self):
+        jpeg, png = encoded('JPEG'), encoded('PNG')
+        damaged = {
+            'JPEG segment longer than the file': jpeg[:2] + b'\xff\xe1\xff\xff short',
+            'JPEG with bytes between segments': jpeg[:2] + b'\x00\x01' + jpeg[2:],
+            'PNG chunk longer than the file': png[:33] + (10**6).to_bytes(4, 'big') + b'tEXt',
+            'PNG with an unknown critical chunk': png[:-12] + imagemeta._png_chunk(b'ZzZz', b'?') + png[-12:],
+            'WebP chunk longer than the file': encoded('WEBP')[:20] + b'\xff\xff\xff\x00',
+        }
+        for case, data in damaged.items():
+            with self.subTest(case=case), self.assertRaises(imagemeta.UnsupportedImage):
+                imagemeta.clean(data)
+
+    def test_png_date_and_private_chunks_go_and_appended_data_too(self):
+        plain = encoded('PNG')
+        data = plain[:-12] + imagemeta._png_chunk(b'tIME', b'\x07\xea\x0b\x0d\x0c\x00\x00') + plain[-12:] + b'trailing data'
+        data = data[:33] + imagemeta._png_chunk(b'prVt', b'private') + data[33:]
+        cleaned, removed = imagemeta.clean(data)
+        self.assertEqual(removed, [imagemeta.OTHER, imagemeta.DATE, imagemeta.EXTRAS])
+        self.assertEqual(cleaned, plain)
+
+    def test_upright_webp_loses_exif_and_its_header_flag(self):
+        data = encoded('WEBP', exif=exif_bytes(), lossless=True)
+        cleaned, removed = imagemeta.clean(data)
+        self.assertEqual(removed, [imagemeta.EXIF_GPS])
+        self.assertSamePixels(data, cleaned)
+        with Image.open(io.BytesIO(cleaned)) as result:
+            self.assertEqual(len(result.getexif()), 0)
+
     def test_other_files_are_refused(self):
         with self.assertRaises(imagemeta.UnsupportedImage):
             imagemeta.clean(b'GIF89a not one of the supported formats')
