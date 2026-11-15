@@ -4,9 +4,10 @@ from io import StringIO
 
 from django.core.management import call_command
 from django.core.management.base import CommandError
-from django.db import connection
-from django.test import TestCase
+from django.db import DatabaseError, connection
+from django.test import SimpleTestCase, TestCase
 
+from config.test_runner import drop_test_database
 from core.rls import tables_without_rls
 
 
@@ -44,3 +45,29 @@ class DbcheckCommandTests(TestCase):
         with self.assertRaisesMessage(CommandError, 'django_session'):
             self.run_dbcheck()
         self.assertIn('Database check passed.', self.run_dbcheck('--before-migrate'))
+
+
+class FlakyCursor:
+    """Fails the first `failures` statements, like a DROP that meets a busy autovacuum worker."""
+
+    def __init__(self, failures):
+        self.failures = failures
+        self.statements = []
+
+    def execute(self, sql):
+        self.statements.append(sql)
+        if len(self.statements) <= self.failures:
+            raise DatabaseError('permission denied to terminate process')
+
+
+class TestDatabaseDropTests(SimpleTestCase):
+    def test_drop_is_retried_until_it_succeeds(self):
+        cursor = FlakyCursor(failures=2)
+        drop_test_database(cursor, '"test_app"', pause=0)
+        self.assertEqual(cursor.statements, ['DROP DATABASE IF EXISTS "test_app" WITH (FORCE)'] * 3)
+
+    def test_drop_gives_up_after_the_last_attempt(self):
+        cursor = FlakyCursor(failures=10)
+        with self.assertRaises(DatabaseError):
+            drop_test_database(cursor, '"test_app"', attempts=3, pause=0)
+        self.assertEqual(len(cursor.statements), 3)
